@@ -1,0 +1,25 @@
+{
+  "name": "vvvvvv-scripts",
+  "displayName": "vvvvvv-scripts",
+  "description": "Language support for VVVVVV scripts",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.101.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "v6",
+      "aliases": ["VVVVVV", "v6"],
+      "extensions": [".v6", ".v6script"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "v6",
+      "scopeName": "source.v6",
+      "path": "./syntaxes/v6.tmLanguage.json"
+    }]
+  }
+}

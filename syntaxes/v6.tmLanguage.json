@@ -1,0 +1,113 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "VVVVVV",
+  "patterns": [
+    {
+      "include": "#full-line-comment"
+    },
+    {
+      "include": "#flag-command"
+    },
+    {
+      "include": "#command"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.v6",
+          "match": "\\b(if|while|for|return)\\b"
+        }
+      ]
+    },
+    "command": {
+      "match": "^([A-z]+)\\s*([(),].+)?$",
+      "name": "meta.line.v6",
+      "captures": {
+        "1": {
+          "name": "support.function.v6"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#arguments"
+            }
+          ]
+        }
+      }
+    },
+    "flag-command": {
+      "match": "(?i)^(flag|ifflag|customifflag)\\s*[(),](.+)[(),]\\s*(.+)$",
+      "name": "meta.line.v6",
+      "captures": {
+        "1": {
+          "name": "support.function.v6"
+        },
+        "2": {
+          "name": "constant.character.escape.flag-name.v6"
+        },
+        "3": {
+          "patterns": [
+            {
+              "include": "#arguments"
+            }
+          ]
+        }
+      }
+    },
+    "arguments": {
+      "patterns": [
+        {
+          "match": "\\b(\\d+)\\b",
+          "captures": {
+            "1": {
+              "name": "constant.numeric.v6"
+            }
+          }
+        },
+        {
+          "match": "\\b(on|off)\\b",
+          "captures": {
+            "1": {
+              "name": "constant.language.boolean.v6"
+            }
+          }
+        },
+        {
+          "match": "\\b(cyan|player|blue|red|yellow|green|purple)\\b",
+          "captures": {
+            "1": {
+              "name": "constant.language.color.v6"
+            }
+          }
+        },
+        {
+          "match": "[(),]\\s*(#[^(),]*?)(?:[(),]|$)",
+          "captures": {
+            "1": {
+              "name": "comment.block.v6"
+            }
+          }
+        }
+      ]
+    },
+    "full-line-comment": {
+      "name": "comment.line.v6",
+      "match": "^#.*$"
+    },
+    "paren-expression": {
+      "begin": "\\(",
+      "end": "\\)",
+      "beginCaptures": {
+        "0": { "name": "punctuation.paren.open" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.paren.close" }
+      },
+      "name": "expression.group",
+      "patterns": [{ "include": "#expression" }]
+    }
+  },
+  "scopeName": "source.v6"
+}
