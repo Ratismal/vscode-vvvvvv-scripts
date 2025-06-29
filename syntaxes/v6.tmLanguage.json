@@ -38,7 +38,7 @@
       }
     },
     "flag-command": {
-      "match": "(?i)^(flag|ifflag|customifflag)\\s*[(),](.+)[(),]\\s*(.+)$",
+      "match": "(?i)^(flag|ifflag|customifflag)\\s*[(),](.+)([(),]\\s*.+)$",
       "name": "meta.line.v6",
       "captures": {
         "1": {
@@ -57,40 +57,46 @@
       }
     },
     "arguments": {
-      "patterns": [
-        {
-          "match": "\\b(\\d+)\\b",
-          "captures": {
-            "1": {
-              "name": "constant.numeric.v6"
+      "match": "[(),]\\s*([^(),]+)\\s*",
+      "captures": {
+        "1": {
+					"name": "meta.parameter.v6",
+          "patterns": [
+            {
+              "match": "\\b(\\d+)\\b",
+              "captures": {
+                "1": {
+                  "name": "constant.numeric.v6"
+                }
+              }
+            },
+            {
+              "match": "\\b(on|off)\\b",
+              "captures": {
+                "1": {
+                  "name": "constant.language.boolean.v6"
+                }
+              }
+            },
+            {
+              "match": "\\b(cyan|player|blue|red|yellow|green|purple)\\b",
+              "captures": {
+                "1": {
+                  "name": "constant.language.color.v6"
+                }
+              }
+            },
+            {
+              "match": "(#[^(),]*)",
+              "captures": {
+                "1": {
+                  "name": "comment.block.v6"
+                }
+              }
             }
-          }
-        },
-        {
-          "match": "\\b(on|off)\\b",
-          "captures": {
-            "1": {
-              "name": "constant.language.boolean.v6"
-            }
-          }
-        },
-        {
-          "match": "\\b(cyan|player|blue|red|yellow|green|purple)\\b",
-          "captures": {
-            "1": {
-              "name": "constant.language.color.v6"
-            }
-          }
-        },
-        {
-          "match": "[(),]\\s*(#[^(),]*?)(?:[(),]|$)",
-          "captures": {
-            "1": {
-              "name": "comment.block.v6"
-            }
-          }
+          ]
         }
-      ]
+      }
     },
     "full-line-comment": {
       "name": "comment.line.v6",
